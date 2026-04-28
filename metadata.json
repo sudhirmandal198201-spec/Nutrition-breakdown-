@@ -1,0 +1,6 @@
+{
+  "name": "NutriScope by Karn Mandal",
+  "description": "An intelligent nutrition breakdown and health tracker. Analyze meals with AI image recognition, track nutritional daily intake, calculate BMI, and get personalized diet suggestions with Indian food support.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["AI Food Recognition", "Nutritional Tracking", "Barcode Scanning", "Voice Input", "Meal Planning"]
+}

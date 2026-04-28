@@ -1,0 +1,79 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and health preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "age": { "type": "number" },
+        "gender": { "type": "string", "enum": ["male", "female", "other"] },
+        "height": { "type": "number", "description": "Height in cm" },
+        "weight": { "type": "number", "description": "Weight in kg" },
+        "goal": { "type": "string", "enum": ["weight_loss", "maintenance", "weight_gain"] },
+        "activityLevel": { "type": "string", "enum": ["sedentary", "light", "moderate", "active", "very_active"] },
+        "allergies": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Meal": {
+      "title": "Meal",
+      "description": "A logged meal entry",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "type": { "type": "string", "enum": ["breakfast", "lunch", "dinner", "snack"] },
+        "foods": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "quantity": { "type": "string" },
+              "calories": { "type": "number" },
+              "protein": { "type": "number" },
+              "carbs": { "type": "number" },
+              "fat": { "type": "number" },
+              "fiber": { "type": "number" },
+              "sugar": { "type": "number" }
+            }
+          }
+        },
+        "totalCalories": { "type": "number" },
+        "healthScore": { "type": "number", "description": "1-100 score" },
+        "imageUrl": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "date", "foods"]
+    },
+    "WaterLog": {
+      "title": "WaterLog",
+      "description": "Daily water intake tracking",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "amountMl": { "type": "number" }
+      },
+      "required": ["userId", "date", "amountMl"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/meals/{mealId}": {
+      "schema": "Meal",
+      "description": "Logged meals"
+    },
+    "/waterLogs/{logId}": {
+      "schema": "WaterLog",
+      "description": "Water intake logs"
+    }
+  }
+}
